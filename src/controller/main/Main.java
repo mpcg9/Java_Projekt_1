@@ -35,10 +35,10 @@ public class Main {
 		gui.add(westPanel,BorderLayout.WEST);
 		
 		JButton kmlLoadFileButton = new JButton();
-		kmlLoadFileButton.setText("Straßennetz laden");
+		kmlLoadFileButton.setText("Straï¿½ennetz laden");
 		
 		
-		JComboBox<String> comboBox = new JComboBox<String>();
+		final JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.addItem("dist");
 		comboBox.addItem("car");
 		
@@ -75,7 +75,7 @@ public class Main {
 		westPanel.add(safeButton);
 		
 		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.addTab("Straßennetz",        new JButton ("Straßennetz"));
+		tabbedPane.addTab("Straï¿½ennetz",        new JButton ("Straï¿½ennetz"));
 		tabbedPane.addTab("Routenbeschreibung", new JButton ("Routenbeschreibung"));
 		tabbedPane.addTab("Route",              new JButton ("Route"));
 		gui.add(tabbedPane);
@@ -120,7 +120,7 @@ public class Main {
 								CONTROLLER.findRoute((String) comboBox.getSelectedItem());
 							}
 							else{
-								JOptionPane.showMessageDialog(null , "Es konnte keine Route berechnet werden, da die eingegebenen Start- und Zielpunkte nicht gefunden werden konnten. Bitte überprüfe, ob du den Startpunkt als \"Start\" sowie den Zielpunkt als \"Ziel\" bezeichnet hast und ob sich beide Punkte in einem Ordner befinden!", "Start- oder Zielknoten nicht gefunden", 0);
+								JOptionPane.showMessageDialog(null , "Es konnte keine Route berechnet werden, da die eingegebenen Start- und Zielpunkte nicht gefunden werden konnten. Bitte ï¿½berprï¿½fe, ob du den Startpunkt als \"Start\" sowie den Zielpunkt als \"Ziel\" bezeichnet hast und ob sich beide Punkte in einem Ordner befinden!", "Start- oder Zielknoten nicht gefunden", 0);
 							}
 						}
 						else{
