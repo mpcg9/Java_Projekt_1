@@ -12,7 +12,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
@@ -74,9 +76,15 @@ public class Main {
 		westPanel.add(routeButton);
 		westPanel.add(safeButton);
 		
+		JTextArea routedesc = new JTextArea();
+		routedesc.setEditable(false);
+		
+		JScrollPane routedescWrapper = new JScrollPane();
+		routedescWrapper.setViewportView(routedesc);
+		
 		JTabbedPane tabbedPane = new JTabbedPane();
 		tabbedPane.addTab("Stra�ennetz",        new JButton ("Stra�ennetz"));
-		tabbedPane.addTab("Routenbeschreibung", new JButton ("Routenbeschreibung"));
+		tabbedPane.addTab("Routenbeschreibung", routedescWrapper);
 		tabbedPane.addTab("Route",              new JButton ("Route"));
 		gui.add(tabbedPane);
 		gui.pack();
@@ -117,7 +125,12 @@ public class Main {
 						if(CONTROLLER.graphIsLoaded()){
 							CONTROLLER.findNodes(file.getAbsolutePath());
 							if(CONTROLLER.startEndNodesFound()){
-								CONTROLLER.findRoute((String) comboBox.getSelectedItem());
+								String[] descArray = CONTROLLER.findRoute((String) comboBox.getSelectedItem());
+								String desc = new String();
+								for(String s : descArray){
+									desc = desc.concat(s + "\n");
+								}
+								routedesc.setText(desc);
 							}
 							else{
 								JOptionPane.showMessageDialog(null , "Es konnte keine Route berechnet werden, da die eingegebenen Start- und Zielpunkte nicht gefunden werden konnten. Bitte �berpr�fe, ob du den Startpunkt als \"Start\" sowie den Zielpunkt als \"Ziel\" bezeichnet hast und ob sich beide Punkte in einem Ordner befinden!", "Start- oder Zielknoten nicht gefunden", 0);
