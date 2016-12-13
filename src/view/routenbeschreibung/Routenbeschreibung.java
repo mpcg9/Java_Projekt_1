@@ -61,13 +61,11 @@ public class Routenbeschreibung {
 	 }
 	 
 	 private static String getStringWohin (String aktuellerName, String nachsterName) {
-		 int geschlecht = 0;		 
+		 int geschlecht = 1;		 
 		 if (nachsterName == null) {
 			 return "";
 		 } else {
-			 if (nachsterName.endsWith("llee")|nachsterName.endsWith("traße")|nachsterName.endsWith("asse")|nachsterName.endsWith("ücke")){
-				 geschlecht = 1;
-			 } else if(nachsterName.endsWith("eg")){
+			 if(nachsterName.endsWith("eg") || nachsterName.endsWith("erg") || nachsterName.endsWith("latz")){
 				 geschlecht = 2;
 			 }
 			 if (nachsterName.equals(aktuellerName)) {
