@@ -61,6 +61,33 @@ public class Kante {
 	}
 
 	//Methoden
+	
+	/**
+	 * giving out the angle between this edge and the given edge in degree
+	 * @param k the edge
+	 * @return the angle in degree
+	 */
+	public double getWinkelGradNaechst(Kante k) {
+		double ax = k.getGeometry().get(1).getX() - k.getGeometry().getFirst().getX();		//Indizesrichtig? 1=2tes Element?
+		double ay = k.getGeometry().get(1).getY() - k.getGeometry().getFirst().getY();
+		double bx = geometry.getLast().getX() - geometry.get(geometry.size()-2).getX();
+		double by = geometry.getLast().getY() - geometry.get(geometry.size()-2).getY();
+		return Math.acos((ax * bx + ay * by)/(k.getGeometry().getFirst().distance(k.getGeometry().get(1))*geometry.getLast().distance(geometry.get(geometry.size()-2))))*180/Math.PI;
+	}
+	
+	/**
+	 * method for deciding whether or not this knot lies to the left of the edge
+	 * @param k the edge
+	 * @return true if and only if this knot lies to the left of the given edge
+	 */
+	public boolean nextIsToTheLeft(Kante k) {
+		double ax = geometry.getLast().getX() - geometry.get(geometry.size()-2).getX();		//Indizesrichtig? 1=2tes Element?
+		double ay = geometry.getLast().getY() - geometry.get(geometry.size()-2).getY();
+		double bx = k.getGeometry().get(1).getX() - geometry.getLast().getX();;
+		double by = k.getGeometry().get(1).getY() - geometry.getLast().getY();
+		return (ax * by - ay * bx > 0.0);
+	}
+	
 	/*
 	 * Getter/Setter-Methoden und toString
 	 */
