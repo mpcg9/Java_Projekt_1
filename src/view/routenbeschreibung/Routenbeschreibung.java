@@ -48,16 +48,19 @@ public class Routenbeschreibung {
 		 }
 		 gesamtEntfernung += listeDerKantenAufDerRoute.getLast().getGewicht("dist");
 		 wieWeit = Routenbeschreibung.getStringWieWeit(listeDerKantenAufDerRoute.getLast().getGewicht("dist")); // Entfernung in m oder km
-		 route[0] = String.format("Die Länge der Berechneten Route beträgt: " + Routenbeschreibung.getStringWieWeit(gesamtEntfernung) + ".");
-		 route[1] = "Bitte in Richtung " + Routenbeschreibung.getHimmelsrichtung(listeDerKantenAufDerRoute.getFirst().getGeometry().get(1),listeDerKantenAufDerRoute.getFirst().getGeometry().get(0)) + " losfahren!";
+		 route[0] = String.format("Die Länge der berechneten Route beträgt: " + Routenbeschreibung.getStringWieWeit(gesamtEntfernung) + ".");
+		 //route[1] = "Bitte in Richtung " + Routenbeschreibung.getHimmelsrichtung(listeDerKantenAufDerRoute.getFirst().getGeometry().get(0),listeDerKantenAufDerRoute.getFirst().getGeometry().get(1)) + " losfahren!";
+		 route[1] = "Bitte losfahren!";
 		 route[s+1] = String.format("In " + wieWeit + " haben sie ihr Ziel erreicht."); 
 		 return route;
 	 }
 	 
 	 private static String getHimmelsrichtung (Point2D.Double p1,Point2D.Double p2) {
 		 String [] Himmelsrichtungen = {"Nord-Osten","Osten","Süd-Osten","Süden","Süd-Westen","Westen","Nord-Westen","Norden"};
-		 double richtungGrad = (Math.atan2(p2.getX()-p1.getX(),p2.getY()-p1.getY())*360/Math.PI)-(360/16)+400;
-		 return Himmelsrichtungen[7-(int)Math.floor((richtungGrad%360)/(360/8))];
+		 double richtungGrad = (Math.atan2(p2.getY()-p1.getY(),p2.getX()-p1.getX())*360/Math.PI);
+		 //double richtungGrad = (Math.atan2(p2.getY()-p1.getY(),p2.getX()-p1.getX())*360/Math.PI)+(360/16)+400;
+		 //return Himmelsrichtungen[7-(int)Math.floor((richtungGrad%360)/(360/8))];
+		 return String.format("%1$.3f°", richtungGrad);
 	 }
 	 
 	 private static String getStringWohin (String aktuellerName, String nachsterName) {
