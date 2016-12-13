@@ -64,11 +64,12 @@ public class Kante {
 	
 	/**
 	 * giving out the angle between this edge and the given edge in degree
+	 * @author Hendrik
 	 * @param k the edge
 	 * @return the angle in degree
 	 */
 	public double getWinkelGradNaechst(Kante k) {
-		double ax = k.getGeometry().get(1).getX() - k.getGeometry().getFirst().getX();		//Indizesrichtig? 1=2tes Element?
+		double ax = k.getGeometry().get(1).getX() - k.getGeometry().getFirst().getX();
 		double ay = k.getGeometry().get(1).getY() - k.getGeometry().getFirst().getY();
 		double bx = geometry.getLast().getX() - geometry.get(geometry.size()-2).getX();
 		double by = geometry.getLast().getY() - geometry.get(geometry.size()-2).getY();
@@ -76,16 +77,55 @@ public class Kante {
 	}
 	
 	/**
-	 * method for deciding whether or not this knot lies to the left of the edge
+	 * method for deciding whether or not next edge lies to the left of this edge
+	 * @author Hendrik
 	 * @param k the edge
-	 * @return true if and only if this knot lies to the left of the given edge
+	 * @return true if and only if the given edge lies to the left of this edge
 	 */
 	public boolean nextIsToTheLeft(Kante k) {
-		double ax = geometry.getLast().getX() - geometry.get(geometry.size()-2).getX();		//Indizesrichtig? 1=2tes Element?
+		double ax = geometry.getLast().getX() - geometry.get(geometry.size()-2).getX();
 		double ay = geometry.getLast().getY() - geometry.get(geometry.size()-2).getY();
 		double bx = k.getGeometry().get(1).getX() - geometry.getLast().getX();;
 		double by = k.getGeometry().get(1).getY() - geometry.getLast().getY();
 		return (ax * by - ay * bx > 0.0);
+	}
+	
+	/**
+	 * method for deciding whether or not this node lies to the left of the edge
+	 * @author Hendrik
+	 * @param k the node
+	 * @return true if and only if the given node lies to the left of the edge
+	 */
+	public boolean nodeIsToTheLeft(Knoten k) {
+		double ax = geometry.getLast().getX() - geometry.get(geometry.size()-2).getX();
+		double ay = geometry.getLast().getY() - geometry.get(geometry.size()-2).getY();
+		double bx = k.getX() - geometry.getLast().getX();;
+		double by = k.getY() - geometry.getLast().getY();
+		return (ax * by - ay * bx > 0.0);
+	}
+	
+	/**
+	 * method for projecting a node on this edge, giving back a new edge.
+	 * @author Hendrik
+	 * @param k the node
+	 * @param richtung = 0 if new edge begins at point of projektion, else 1 (ends at pp)
+	 * @return the new edge
+	 */
+	public Kante getProjektion(Knoten k, int richtung){
+		Kante kanteP = this;
+		Knoten kP = this.anfang;
+		double[] a = {k.x-this.anfang.x,k.y-this.anfang.y};
+		double[] b = {this.ende.x-this.anfang.x,this.ende.y-this.anfang.y};
+		double factor = (a[0]*b[0]+a[1]*b[1])/(b[0]*b[0]+b[1]*b[1]);
+		double[] ab = {factor*b[0],factor*b[1]};
+		kP.x+=ab[0];
+		kP.y+=ab[1];
+		if (richtung == 0){
+			kanteP.setAnfang(kP);
+		} else if (richtung == 1){
+			kanteP.setEnde(kP);
+		}
+		return kanteP;
 	}
 	
 	/*
