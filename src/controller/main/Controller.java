@@ -7,6 +7,7 @@ import controller.laden.NodeFinder;
 import model.dijkstraData.Kante;
 import model.dijkstraNetwork.Graph;
 import view.kml.RouteInKml;
+import view.routenbeschreibung.Routenbeschreibung;
 
 public class Controller {
 	private Graph graph;
@@ -28,8 +29,9 @@ public class Controller {
 		this.routeActive = this.graph.berechneRoute(knotenIDStart, knotenIDEnde, gewichtTyp);
 	}
 	
-	public void findRoute(String gewichtTyp){
+	public String[] findRoute(String gewichtTyp){
 		this.routeActive = this.graph.berechneRoute(startEndNodes[0], startEndNodes[1], gewichtTyp);
+		return Routenbeschreibung.erzeugeRoutenbeschreibung(this.routeActive);
 	}
 	
 	public void findNodes(String filename){
