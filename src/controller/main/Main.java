@@ -154,7 +154,7 @@ public class Main {
 					case JFileChooser.APPROVE_OPTION:
 						File file = chooser.getSelectedFile();
 						if(CONTROLLER.routeFound()){
-							CONTROLLER.saveKML(file.getAbsolutePath());
+							CONTROLLER.saveKML(file.getAbsolutePath() + (file.getAbsolutePath().endsWith(".kml")?"":".kml"));
 						}
 						else{
 							JOptionPane.showMessageDialog(null , "Es konnte keine Route gespeichert werden, da noch keine Route berechnet wurde oder keine Route gefunden werden konnte!", "Keine Route gefunden!", 0);
