@@ -76,17 +76,13 @@ public class Main {
 		westPanel.add(routeButton);
 		westPanel.add(safeButton);
 		
-		JTextArea routedesc = new JTextArea();
+		JTextArea routedesc = new JTextArea("Routenplaner der Gruppe NullPointerException\nbonn.xml wurde bereits geladen!");
 		routedesc.setEditable(false);
 		
 		JScrollPane routedescWrapper = new JScrollPane();
 		routedescWrapper.setViewportView(routedesc);
 		
-		JTabbedPane tabbedPane = new JTabbedPane();
-		tabbedPane.addTab("Stra�ennetz",        new JButton ("Stra�ennetz"));
-		tabbedPane.addTab("Routenbeschreibung", routedescWrapper);
-		tabbedPane.addTab("Route",              new JButton ("Route"));
-		gui.add(tabbedPane);
+		gui.add(routedescWrapper);
 		gui.pack();
 		
 		gui.setLocation(0, 0);
