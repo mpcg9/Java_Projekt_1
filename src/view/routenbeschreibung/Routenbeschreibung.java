@@ -64,17 +64,19 @@ public class Routenbeschreibung {
 	 }
 	 
 	 private static String getStringWohin (String aktuellerName, String nachsterName) {
-		 int geschlecht = 1;		 
+		 int geschlecht = 0;		 
 		 if (nachsterName == null) {
 			 return "";
 		 } else {
 			 if(nachsterName.endsWith("eg") || nachsterName.endsWith("erg") || nachsterName.endsWith("latz")){
 				 geschlecht = 2;
+			 } else if (nachsterName.endsWith("traße") || nachsterName.endsWith("asse") || nachsterName.endsWith("llee") || nachsterName.endsWith("ücke")){
+				 geschlecht = 1;
 			 }
 			 if (nachsterName.equals(aktuellerName)) {
-				 return String.format(Auf[1+2*geschlecht] + nachsterName + Auf[6]);
+				 return String.format(Auf[1+2*geschlecht] + "'" + nachsterName + "'" + Auf[6]);
 			 } else {
-				 return String.format(Auf[0+2*geschlecht] + nachsterName);
+				 return String.format(Auf[0+2*geschlecht] + "'" + nachsterName + "'");
 			 }
 		 }
 	 }
